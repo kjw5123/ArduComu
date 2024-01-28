@@ -2,7 +2,6 @@ package JW.ArduComu.repository;
 
 import JW.ArduComu.domain.ArduinoData;
 
-import java.util.List;
 import java.util.Map;
 
 public interface ArduinoDataRepository {
@@ -13,7 +12,7 @@ public interface ArduinoDataRepository {
     Map<String, Double> getTempHistory();
     Map<String, Double> getHumiHistory();
     Map<String, Double> getDustHistory();
-    List<List<Object>> getAllHistory();
+    Map<String, ArduinoData> getAllHistory();
 
     void clearStored();
 }

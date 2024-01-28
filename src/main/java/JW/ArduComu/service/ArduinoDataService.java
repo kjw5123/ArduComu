@@ -4,7 +4,6 @@ import JW.ArduComu.domain.ArduinoData;
 import JW.ArduComu.repository.ArduinoDataRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -20,12 +19,11 @@ public class ArduinoDataService {
         arduinoDataRepository.save(arduinoData);
             currentRepository.clearStored();
             currentRepository.save(arduinoData);
-//        return arduinoData.getTime();
-    } // todo: 추후 수정 필요할 듯 (뭔가 이유는 모르겠는데 문제 생길 듯)
+    }
     public ArduinoData outData(){
         return currentRepository.recentData();
     }
-    public List<List<Object>> allArduinoDataHistories(){
+    public Map<String, ArduinoData> allArduinoDataHistories(){
         return arduinoDataRepository.getAllHistory();
     }
 

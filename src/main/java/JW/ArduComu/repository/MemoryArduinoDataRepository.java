@@ -5,16 +5,17 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 @Repository
-public class MemoryArduinoDataRepository implements ArduinoDataRepository{
+public class MemoryArduinoDataRepository implements ArduinoDataRepository {
 
     private static final Map<Long, ArduinoData> stored = new HashMap<>();
     private static long Num = 0L;
     private static ArduinoData newStored = new ArduinoData();
 
-    private static final List<List<Object>> allHistoryList = new ArrayList<>();
-    private  static final Map<String, Double> tempHistoryMap = new HashMap<>();
-    private  static final Map<String, Double> humiHistoryMap = new HashMap<>();
-    private  static final Map<String, Double> dustHistoryMap = new HashMap<>();
+    private static final Map<String, ArduinoData> allHistoryList = new HashMap<>();
+    private static final Map<String, Double> tempHistoryMap = new HashMap<>();
+    private static final Map<String, Double> humiHistoryMap = new HashMap<>();
+    private static final Map<String, Double> dustHistoryMap = new HashMap<>();
+
     @Override
     public void save(ArduinoData arduinoData) {
 
@@ -22,19 +23,22 @@ public class MemoryArduinoDataRepository implements ArduinoDataRepository{
         newStored = arduinoData;
 //        return arduinoData;
     }
+
     @Override
-    public ArduinoData recentData(){
+    public ArduinoData recentData() {
         return newStored;
     }
+
     @Override
     public Map<String, Double> getTempHistory() {
-        if(Num >= 1L){
-        for (long i = 1L; i <= Num; i++){
+        if (Num >= 1L) {
+            for (long i = 1L; i <= Num; i++) {
                 tempHistoryMap.put(stored.get(i).getTime(), stored.get(i).getTemp());
             }
         }
         return tempHistoryMap;
     }
+
     @Override
     public Map<String, Double> getHumiHistory() {
         if (Num >= 1L) {
@@ -44,6 +48,7 @@ public class MemoryArduinoDataRepository implements ArduinoDataRepository{
         }
         return humiHistoryMap;
     }
+
     @Override
     public Map<String, Double> getDustHistory() {
         if (Num >= 1L) {
@@ -53,25 +58,28 @@ public class MemoryArduinoDataRepository implements ArduinoDataRepository{
         }
         return dustHistoryMap;
     }
+
     @Override
-    public List<List<Object>> getAllHistory() {
+    public Map<String, ArduinoData> getAllHistory() {
+        ArduinoData arduinoData = new ArduinoData();
         if (Num >= 1L) {
             for (long i = 1L; i <= Num; i++) {
-                List<Object> innerList = new ArrayList<>();
-                innerList.add(stored.get(i).getTime());
-                innerList.add(stored.get(i).getTemp());
-                innerList.add(stored.get(i).getHumi());
-                innerList.add(stored.get(i).getDust());
-                allHistoryList.add(innerList);
+                arduinoData.setTime(stored.get(i).getTime());
+                arduinoData.setTemp(stored.get(i).getTemp());
+                arduinoData.setHumi(stored.get(i).getHumi());
+                arduinoData.setDust(stored.get(i).getDust());
+
+                allHistoryList.put(stored.get(i).getTime(), arduinoData);
             }
         }
         return allHistoryList;
     }
+
     public void clearStored() {
         stored.clear();
         Num = 0L;
     }
-    //todo: 아래는 이전 파일들.
+}
 //    @Override
 //    public Optional<Map<String, Double>> getTempHistory() {
 //        Map<String, Double> tempHistoryMap = new HashMap<>();
@@ -103,4 +111,3 @@ public class MemoryArduinoDataRepository implements ArduinoDataRepository{
 //        return Optional.of(dustHistoryMap);
 //    }
 
-}

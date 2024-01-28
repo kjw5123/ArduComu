@@ -7,15 +7,16 @@ public class ArduinoData {
     private Double dust;
     private String time;
 
-    public ArduinoData(){
+//    public ArduinoData(){
+//
+//    }
+//    public ArduinoData(String time, Double temp, Double humi, Double dust) {
+//        this.time = time;
+//        this.temp = temp;
+//        this.humi = humi;
+//        this.dust = dust;
+//    }
 
-    }
-    public ArduinoData(String time, Double temp, Double humi, Double dust) {
-        this.time = time;
-        this.temp = temp;
-        this.humi = humi;
-        this.dust = dust;
-    }
     public String getTime() {
         return time;
     }

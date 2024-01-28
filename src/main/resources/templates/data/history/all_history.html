@@ -19,14 +19,14 @@
         }
 
         th, td {
-            border: 1px solid #abd16d;
+            border: 1px solid #e3dc5a;
             text-align: center;
             padding: 10px;
             font-size: 16px;
         }
 
         th {
-            background-color: #acd36e;
+            background-color: #e3dc5a;
         }
     </style>
 </head>
@@ -45,13 +45,13 @@
         <tbody>
         <!-- Loop through the historical data and display each entry -->
         <tr th:each="data : ${nowData}">
-            <td th:text="${data[0]}"></td>
-            <td th:text="${data[1]}"></td>
-            <td th:text="${data[2]}"></td>
-            <td th:text="${data[3]}"></td>
+            <td th:text="${data.getKey()}"></td>
+            <td th:text="${data.getValue().getTemp()}"></td>
+            <td th:text="${data.getValue().getHumi()}"></td>
+            <td th:text="${data.getValue().getDust()}"></td>
         </tr>
         </tbody>
     </table>
-</div> <!-- /container -->
+</div>
 </body>
 </html>
