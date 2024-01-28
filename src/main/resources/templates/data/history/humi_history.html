@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historical Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #abd16d;
+            text-align: center;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #acd36e;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Dust Historical Data</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Humidity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through the historical data and display each entry -->
+        <tr th:each="data : ${nowData}">
+            <td th:text="${data.getKey()}"></td>
+            <td th:text="${data.getValue()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div> <!-- /container -->
+</body>
+</html>
