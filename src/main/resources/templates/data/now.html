@@ -45,23 +45,18 @@
 <div class="container">
   <table>
     <thead>
-<!--    <tr>-->
-<!--      <th colspan="3">공사중 입니다.</th>-->
-<!--    </tr>-->
     <tr>
       <td class="Time" colspan="3" th:text="'시간: ' + ${nowData.time}">시간: </td>
     </tr>
     </thead>
-    <!-- 추가적인 데이터 표시를 위한 tbody -->
     <tbody>
     <tr>
       <td class="Temp" th:text="'온도: ' + ${nowData.temp}">온도: </td>
       <td class="Humi" th:text="'습도: ' + ${nowData.humi}">습도: </td>
       <td class="Dust" th:text="'미세먼지: ' + ${nowData.dust}">미세먼지: </td>
     </tr>
-    <!-- 여기에 필요한 경우 추가적인 행과 데이터를 넣을 수 있습니다. -->
     </tbody>
   </table>
-</div> <!-- /container -->
+</div>
 </body>
 </html>

@@ -19,35 +19,47 @@
         }
 
         th, td {
-            border: 1px solid #abd16d;
+            border: 1px solid #e3dc5a;
             text-align: center;
             padding: 10px;
             font-size: 16px;
         }
 
         th {
-            background-color: #acd36e;
+            background-color: #e3dc5a;
+        }
+        button{
+            font-size: 20px;
+            padding: 10px 20px;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>Dust Historical Data</h2>
+    <h2>Historical Data</h2>
     <table>
         <thead>
         <tr>
+            <th>Number</th>
             <th>Time</th>
+            <th>Temperature</th>
             <th>Humidity</th>
+            <th>Dust</th>
         </tr>
         </thead>
         <tbody>
         <!-- Loop through the historical data and display each entry -->
         <tr th:each="data : ${nowData}">
             <td th:text="${data.getKey()}"></td>
-            <td th:text="${data.getValue()}"></td>
+            <td th:text="${data.getValue().getTime()}"></td>
+            <td th:text="${data.getValue().getTemp()}"></td>
+            <td th:text="${data.getValue().getHumi()}"></td>
+            <td th:text="${data.getValue().getDust()}"></td>
         </tr>
         </tbody>
     </table>
+    <h1><button type="button" onclick="location.href='/'">돌아가기</button></h1>
+
 </div>
 </body>
 </html>

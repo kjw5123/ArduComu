@@ -28,6 +28,10 @@
         th {
             background-color: #acd36e;
         }
+        button{
+            font-size: 20px;
+            padding: 10px 20px;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +40,7 @@
     <table>
         <thead>
         <tr>
+            <th>Number</th>
             <th>Time</th>
             <th>Dust</th>
         </tr>
@@ -44,10 +49,12 @@
         <!-- Loop through the historical data and display each entry -->
         <tr th:each="data : ${nowData}">
             <td th:text="${data.getKey()}"></td>
-            <td th:text="${data.getValue()}"></td>
+            <td th:text="${data.getValue().getTime()}"></td>
+            <td th:text="${data.getValue().getDust()}"></td>
         </tr>
         </tbody>
     </table>
+    <h1><button type="button" onclick="location.href='/'">돌아가기</button></h1>
 </div>
 </body>
 </html>

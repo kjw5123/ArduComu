@@ -12,55 +12,55 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/data")
 public class PageController {
-
     private final ArduinoDataService arduinoDataService;
+
     @Autowired
     public PageController(ArduinoDataService arduinoDataService) {
         this.arduinoDataService = arduinoDataService;
     }
-    @PostMapping("/insert")
-    public ResponseEntity<ArduinoData> postData(@RequestBody ArduinoData arduinoData) { //아두이노 데이터 들어온다. body 받게금 RequestBody 사용
-        arduinoDataService.InsertData(arduinoData);
-//        System.out.println("posted it." + arduinoDataService.allArduinoDataHistories()); 입력 테스트용 코드
+    @PostMapping("/data")
+    public ResponseEntity<ArduinoData> postData(@RequestBody ArduinoData arduinoData) {
+        arduinoDataService.insertData(arduinoData);
         return ResponseEntity.ok(arduinoData);
     }
 
-    @GetMapping("/now") //현재 대기 상황
-    public String getNowData(Model model){
+    @GetMapping("/data")
+    public String getData(Model model){
         ArduinoData arduinoData;
-        arduinoData = arduinoDataService.outData();
+        arduinoData = arduinoDataService.getRecentData();
         model.addAttribute("nowData", arduinoData);
         return "data/now";
     }
 
-    @GetMapping("/history/dust") // 미세먼지 기록 조회
-    public String getDustData(Model model){
-        Map<String, Double> arduinoData = arduinoDataService.getDustHistory();
+    @GetMapping("/datas/dust")
+    public String getDustDatas(Model model){
+        Map<Long, ArduinoData> arduinoData = arduinoDataService.getStoredData();
+        System.out.println("Dust history: " + arduinoData);
         model.addAttribute("nowData", arduinoData);
-        return "data/history/dust_history";
-    }
-    @GetMapping("/history/humi") // 습도 기록 조회
-    public String getHumiData(Model model){
-        Map<String, Double> arduinoData = arduinoDataService.getHumiHistory();
-        model.addAttribute("nowData", arduinoData);
-        return "data/history/humi_history";
+        return "datas/dust-history";
     }
 
-    @GetMapping("/history/temp") // 기온 기록 조회
-    public String getTempData(Model model){
-        Map<String, Double> arduinoData = arduinoDataService.getTempHistory();
+    @GetMapping("/datas/humi")
+    public String getHumiDatas(Model model){
+        Map<Long, ArduinoData> arduinoData = arduinoDataService.getStoredData();
         model.addAttribute("nowData", arduinoData);
-        return "data/history/temp_history";
-    }
-    @GetMapping("/history/all") // 모든 기록 조회
-    public String getAllData(Model model){
-        Map<String, ArduinoData> arduinoData = arduinoDataService.allArduinoDataHistories();
-        model.addAttribute("nowData", arduinoData);
-        return "data/history/all_history";
+        return "datas/humi-history";
     }
 
+    @GetMapping("/datas/temp")
+    public String getTempDatas(Model model){
+        Map<Long, ArduinoData> arduinoData = arduinoDataService.getStoredData();
+        model.addAttribute("nowData", arduinoData);
+        return "datas/temp-history";
+    }
+
+    @GetMapping("/datas/all")
+    public String getAllDatas(Model model){
+        Map<Long, ArduinoData> arduinoData = arduinoDataService.getStoredData();
+        model.addAttribute("nowData", arduinoData);
+        return "datas/all-history";
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(PageController.class, args);
