@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.time.Instant;
 
 @Controller
 public class PageController {
@@ -74,6 +75,18 @@ public class PageController {
         Map<String, LocalDateTime> timeJson = new HashMap<>();
         timeJson.put("Server Time", currentTime);
         return ResponseEntity.ok(timeJson);
+    }
+    @GetMapping("/ttime")
+    public ResponseEntity<LocalDateTime> getCurrentTTime(){
+        LocalDateTime currentTime = LocalDateTime.now();
+        return ResponseEntity.ok(currentTime);
+    }
+
+    @GetMapping("/tttime")
+    public ResponseEntity<Long> getCurrentTTTime(){
+        Instant currentTime = Instant.now();
+        long epoch = currentTime.toEpochMilli();
+        return ResponseEntity.ok(epoch);
     }
     public static void main(String[] args) {
         SpringApplication.run(PageController.class, args);

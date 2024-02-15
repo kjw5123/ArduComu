@@ -9,7 +9,7 @@
     }
 
     .container {
-      margin-top: 50px;
+      margin-top: 150px;
     }
 
     table {
@@ -21,12 +21,12 @@
       border: 1px solid #000000;
       text-align: center;
       padding: 120px;
-      font-size: 60px;
+      font-size: 120px;
     }
 
-    .Time {
-      background-color: #acd36e;
-    }
+    /*.Time {*/
+    /*  background-color: #acd36e;*/
+    /*}*/
 
     /* 나중에 따로 공부하셈 이거*/
     .Temp{
@@ -44,11 +44,11 @@
 <body>
 <div class="container">
   <table>
-    <thead>
-    <tr>
-      <td class="Time" colspan="3" th:text="'시간: ' + ${nowData.time}">시간: </td>
-    </tr>
-    </thead>
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <td class="Time" colspan="3" th:text="'시간: ' + ${nowData.time}">시간: </td>-->
+<!--    </tr>-->
+<!--    </thead>-->
     <tbody>
     <tr>
       <td class="Temp" th:text="'온도: ' + ${nowData.temp}">온도: </td>
